@@ -7,6 +7,11 @@ int main()
 	cout<<"total Dorms: ";
 	cin>>totalChoice;
 	cout<<endl;
+	
+	cout<<"number of bad per dorms:- ";
+	int numOfbad;
+	cin>>numOfbad;
+	
 	int n;
 	cout<<"total students: ";
 	cin>>n;
@@ -26,8 +31,6 @@ int main()
 		cout<<endl;
 	}
 	
-	vector<int>vis(totalChoice+1,0);
-	
 	unordered_map<int,int>rank;
 	
     for (int i = 1; i <=n; i++) {
@@ -46,6 +49,8 @@ int main()
     	cout<<r<<" "<<rank[r]<<endl;
 	}
 	cout<<endl;
+	
+	unordered_map<int,int>allocatedStudent;
 	unordered_map<int,int>allocated;
 	
 	for(int ran=1;ran<=n;ran++)
@@ -53,8 +58,8 @@ int main()
 		int ID = rank[ran];
 		for(int choice:m[ID])
 		{
-			if(vis[choice]==0){
-				vis[choice]=1;
+			if(allocatedStudent[choice]<numOfbad){
+				allocatedStudent[choice]++;
 				allocated[ID]=choice;
 				break;
 			}
